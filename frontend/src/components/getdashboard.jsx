@@ -12,7 +12,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://flavor-fusion-ylnk.onrender.com/api/dashboard/');
+        const response = await axios.get('https://flavor-fusion-ylnk.onrender.com/api/dashboard/',{ withCredentials: true });
 
         if (response.data.userId && response.data.name) {
           setUserId(response.data.userId);

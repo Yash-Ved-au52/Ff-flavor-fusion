@@ -24,7 +24,7 @@ const Recipes = ({ collection }) => {
   const addToCollection = async (recipeId) => {
     try {
       // Send a request to add the recipe to the user's collection
-      await axios.post('https://flavor-fusion-ylnk.onrender.com/api/collection', { recipeId });
+      await axios.post('https://flavor-fusion-ylnk.onrender.com/api/collection', { recipeId },{ withCredentials: true });
       console.log(`Recipe with ID ${recipeId} added to collection`);
       setShowMessage(true); // Show the success message
     } catch (error) {
