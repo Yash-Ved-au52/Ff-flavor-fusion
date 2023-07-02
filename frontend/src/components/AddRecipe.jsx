@@ -13,7 +13,7 @@ const [author, setAuthor] = useState('');
 const handleAddRecipe = async (e) => {
   e.preventDefault();
     try{
-     let response =  await axios.post('https://flavor-fusion-ylnk.onrender.com/addRecipe', { title, ingredients, instructions, note, prepTime, author });
+     let response =  await axios.post('https://flavor-fusion-ylnk.onrender.com/addRecipe', { title, ingredients, instructions, note, prepTime, author },{ withCredentials: true });
       // Handle successful recipe addition
       if(response.status === 200)
       {

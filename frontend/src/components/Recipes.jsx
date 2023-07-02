@@ -11,7 +11,7 @@ const Recipes = ({ collection }) => {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get('https://flavor-fusion-ylnk.onrender.com/displayRecipe');
+        const response = await axios.get('https://flavor-fusion-ylnk.onrender.com/displayRecipe',{ withCredentials: true });
         setRecipes(response.data);
       } catch (error) {
         console.log('Failed to fetch recipes');

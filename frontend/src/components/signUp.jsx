@@ -13,7 +13,7 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://flavor-fusion-ylnk.onrender.com/signUp', { name, email, password });
+      const response = await axios.post('https://flavor-fusion-ylnk.onrender.com/signUp', { name, email, password },{ withCredentials: true });
 
       if(response.status === 200) 
       {
