@@ -19,7 +19,7 @@ const HomePage = () => {
           setName(response.data.name);
           setCollection(response.data.collection);
         } else {
-          window.location.href = '/';
+          // window.location.href = '/';
         }
       } catch (error) {
         console.log(error);

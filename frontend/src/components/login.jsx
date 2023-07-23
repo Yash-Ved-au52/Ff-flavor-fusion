@@ -14,8 +14,8 @@ const Login = () => {
       const response = await axios.post('https://flavor-fusion-ylnk.onrender.com/login', { email, password },{ withCredentials: true });
       if (response.status === 200)
       {
-        const userId = response.data.userId;
-        navigate('/dashboard', { state: { userId } });
+        console.log(document.cookie);
+        navigate('/dashboard');
       }
      
     } catch(error){
