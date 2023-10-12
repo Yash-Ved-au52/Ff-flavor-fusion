@@ -4,14 +4,14 @@ import './styles/Recipes.css';
 import { IconButton, Snackbar } from '@mui/material';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
-const Recipes = ({ collection }) => {
+const Recipes = ({ collection , userId}) => {
   const [recipes, setRecipes] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get('https://flavor-fusion-ylnk.onrender.com/displayRecipe',{ withCredentials: true });
+        const response = await axios.get('https://flavor-fusion-ylnk.onrender.com/displayRecipe');
         setRecipes(response.data);
       } catch (error) {
         console.log('Failed to fetch recipes');
@@ -20,11 +20,12 @@ const Recipes = ({ collection }) => {
 
     fetchRecipes();
   }, []);
-
-  const addToCollection = async (recipeId) => {
+  // console.log({userId});
+  const addToCollection = async (recipeId, userId) => {
     try {
       // Send a request to add the recipe to the user's collection
-      await axios.post('https://flavor-fusion-ylnk.onrender.com/api/collection', { recipeId },{ withCredentials: true });
+      console.log("1",userId);
+      await axios.post('https://flavor-fusion-ylnk.onrender.com/api/collection' ,{userId, recipeId});
       console.log(`Recipe with ID ${recipeId} added to collection`);
       setShowMessage(true); // Show the success message
     } catch (error) {
@@ -57,7 +58,7 @@ const Recipes = ({ collection }) => {
             <p className="author-name">~ {recipe.author}</p>
             <IconButton
               className="add-to-collection-button"
-              onClick={() => addToCollection(recipe._id)}
+              onClick={() => addToCollection(recipe._id,userId)}
               title="Add to collection"
             >
               <AddCircleOutlineIcon />

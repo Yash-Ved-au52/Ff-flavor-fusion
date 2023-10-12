@@ -13,12 +13,12 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://flavor-fusion-ylnk.onrender.com/signUp', { name, email, password },{ withCredentials: true });
+      const response = await axios.post('https://flavor-fusion-ylnk.onrender.com/signUp', { name, email, password });
 
       if(response.status === 200) 
       {
         console.log('Sign up successful');
-        navigate('/dashboard');
+        navigate('/dashboard',{ state: { userId: response.data.userId } });
       }
     }catch(error) 
     {

@@ -11,11 +11,11 @@ const Login = () => {
   const handleLogin = async(e) =>{
     e.preventDefault();
     try{
-      const response = await axios.post('https://flavor-fusion-ylnk.onrender.com/login', { email, password },{ withCredentials: true });
+      const response = await axios.post('https://flavor-fusion-ylnk.onrender.com/login', { email, password });
       if (response.status === 200)
       {
-        console.log(document.cookie);
-        navigate('/dashboard');
+        console.log(response.data.userId);
+        navigate('/dashboard',{ state: { userId: response.data.userId } });
       }
      
     } catch(error){

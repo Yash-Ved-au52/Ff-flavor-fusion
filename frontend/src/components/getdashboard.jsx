@@ -2,24 +2,27 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Recipes from './Recipes';
 import ResponsiveAppBar from './manageDashboard/AppBar';
+import { useLocation } from 'react-router-dom';
 
 const HomePage = () => {
-  const [userId, setUserId] = useState('');
+  const location = useLocation();
+  const userId = location.state.userId; 
   const [name, setName] = useState('');
   const [collection, setCollection] = useState([]);
   const [showCollection, setShowCollection] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
+      const fetchData = async () => {
       try {
-        const response = await axios.get('https://flavor-fusion-ylnk.onrender.com/api/dashboard/',{ withCredentials: true });
-
-        if (response.data.userId && response.data.name) {
-          setUserId(response.data.userId);
+        console.log(userId);
+        const response = await axios.get('https://flavor-fusion-ylnk.onrender.com/api/dashboard/', {
+          withCredentials: true,
+          params: { userId }
+        });
+        if (response.data.collection && response.data.name) 
+        {
           setName(response.data.name);
           setCollection(response.data.collection);
-        } else {
-          // window.location.href = '/';
         }
       } catch (error) {
         console.log(error);
@@ -27,7 +30,7 @@ const HomePage = () => {
     };
 
     fetchData();
-  }, []);
+  }, [userId]);
 
   const handleShowCollection = () => {
     setShowCollection(true);
@@ -39,7 +42,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <ResponsiveAppBar name={name} onShowCollection={handleShowCollection} />
+      <ResponsiveAppBar name={name}  userId ={userId} onShowCollection={handleShowCollection} />
 
       {showCollection ? (
         <div>
@@ -54,7 +57,7 @@ const HomePage = () => {
       ) : (
         <>
         <h1>All recipes</h1>
-        <Recipes />
+        <Recipes userId ={userId}/>
         </>
       )}
     </div>
